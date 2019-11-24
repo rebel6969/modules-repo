@@ -52,7 +52,7 @@ class PurgeMod(loader.Module):
                         done = await message.client.send_message(
                             message.chat_id, "<b>Purge is completed."
                             "This message will disappear in a bit.</b>")
-                        await asyncio.sleep(3)
+                        await asyncio.sleep(2)
                         await message.client.delete_messages(message.chat_id, done.id)
                         return
         else:
@@ -71,7 +71,7 @@ class PurgeMod(loader.Module):
                     done = await message.client.send_message(
                                message.chat_id, "<b>Purge is completed."
                                "This message will disappear in a bit.</b>")
-                    await asyncio.sleep(3)
+                    await asyncio.sleep(2)
                     await message.client.delete_messages(message.chat_id, done.id)
                     return
             # No async list comprehension in 3.5
@@ -100,7 +100,7 @@ class PurgeMod(loader.Module):
                         done = await message.client.send_message(
                                    message.chat_id, "<b>Purge is completed."
                                    "This message will disappear in a bit.</b>")
-                        await asyncio.sleep(3)
+                        await asyncio.sleep(2)
                         await message.client.delete_messages(message.chat_id, done.id)
                         return
                 # No async list comprehension in 3.5
@@ -119,7 +119,7 @@ class PurgeMod(loader.Module):
                     done = await message.client.send_message(
                                message.chat_id, "<b>Purge is completed."
                                "This message will disappear in a bit.</b>")
-                    await asyncio.sleep(3)
+                    await asyncio.sleep(2)
                     await message.client.delete_messages(message.chat_id, done.id)
                     return
 
