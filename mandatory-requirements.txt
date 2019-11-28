@@ -1,54 +1,41 @@
-# Core
-telethon
-# Compatibility for 3.5
-future-fstrings
-# Config
-pythondialog
-# Heroku
-heroku3
-gitpython
-# Translations
-babel
-# Eval
-meval
-# Web
 aiohttp_jinja2
+aria2p
+asyncurban
+babel
 beautifulsoup4
-## Modules
-# Lyrics
-lyricsgenius
-# Speedtest
-speedtest-cli
-# Weather
-pyowm
-# Translation
-pyyandextranslateapi
-# Figlet rendering (mock)
-pyfiglet
-# Animated stickers
+cairosvg
+coffeehouse
+cowpy
+cryptg
+emoji
+future-fstrings
 git+https://gitlab.com/mattia.basaglia/tgs@master
-# TTS
+gitpython
+gitpython
+google_images_download
+google-api-python-client
+googletrans
+googletrans
 gtts
 hachoir
-# Updater
-gitpython
-# Lydia
-coffeehouse
-# UrbanDictionary
-asyncurban
-# Google Search
-cryptg
-cairosvg
-Pillow
-google_images_download
-pySmartDL
-aria2p
-selenium
+heroku3
+humanize
+lyricsgenius
+meval
+oauth2client
+pillow
+pydrive
+pyfiglet
 pygithub
-wikipedia
-emoji
-googletrans
-google-api-python-client
+pyowm
+pysmardl
+pysmartdl
+pythondialog
+pyyandextranslateapi
 search_engine_parser
-cowpy
+selenium
+speedtest-cli
+telethon
+wetransferpy
+wikipedia
 youtube-dl
