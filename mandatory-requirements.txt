@@ -28,7 +28,6 @@ pydrive
 pyfiglet
 pygithub
 pyowm
-pysmardl
 pysmartdl
 pythondialog
 pyyandextranslateapi
