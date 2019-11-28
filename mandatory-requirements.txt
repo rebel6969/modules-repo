@@ -13,7 +13,7 @@ babel
 meval
 # Web
 aiohttp_jinja2
-
+beautifulsoup4
 ## Modules
 # Lyrics
 lyricsgenius
@@ -51,5 +51,4 @@ googletrans
 google-api-python-client
 search_engine_parser
 cowpy
-
 youtube-dl
