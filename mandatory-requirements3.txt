@@ -49,7 +49,6 @@ multidict
 oauthlib
 pillow
 psutil
-psycopg2
 psycopg2-binary
 py-crypt
 pyaes
