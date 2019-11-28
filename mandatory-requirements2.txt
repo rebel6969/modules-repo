@@ -63,7 +63,7 @@ pygithub
 pylast
 pymongo
 pymongo[srv]
-"pymssql<3.0"
+pymssql<3.0
 pyowm
 python-barcode
 utilities-package
