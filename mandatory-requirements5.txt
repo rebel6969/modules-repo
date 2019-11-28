@@ -90,6 +90,8 @@ speedtest-cli
 spotify_token
 sql
 sqlalchemy
+sqlHelper
+sql-helper
 telegraph
 telethon
 telethon-session-sqlalchemy
