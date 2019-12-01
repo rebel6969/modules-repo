@@ -83,9 +83,9 @@ def time_formatter(milliseconds: int) -> str:
     return tmp[:-2]
 
 
-@register(pattern=r".download(?: |$)(.*)", outgoing=True)
+@register(pattern=r".dl(?: |$)(.*)", outgoing=True)
 async def download(target_file):
-    """ For .download command, download files to the userbot's server. """
+    """ For .dl command, download files to the userbot's server. """
     await target_file.edit("Processing ...")
     input_str = target_file.pattern_match.group(1)
     if not os.path.isdir(TEMP_DOWNLOAD_DIRECTORY):
