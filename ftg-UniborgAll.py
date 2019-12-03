@@ -313,7 +313,7 @@ async def _(event):
 
         return
 
-    animation_interval = 0.3
+    animation_interval = 2
 
     animation_ttl = range(0, 11)
 
@@ -384,7 +384,7 @@ async def _(event):
 
         return
 
-    animation_interval = 0.3
+    animation_interval = 2
 
     animation_ttl = range(0, 11)
 
@@ -402,7 +402,7 @@ async def _(event):
             "`Raping... 52%\n█████████████▒▒▒▒▒▒▒▒▒▒▒▒ `",
             "`Raping... 84%\n█████████████████████▒▒▒▒ `",
             "`Raping... 100%\n█████████RAPED███████████ `",
-            "`Target Raped Successfully...\n\nPay 999$ To @RebelVicious and get Raped`"
+            "`Target Raped Successfully...\n\nPay 999$ To `@RebelVicious` and get Raped`"
         ]
 
     for i in animation_ttl:
