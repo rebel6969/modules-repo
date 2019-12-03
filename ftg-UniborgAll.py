@@ -365,7 +365,7 @@ async def selfdestruct(destroy):
         time.sleep(counter)
         await smsg.delete()
 
-
+	
 """command: .rape"""
 
 from telethon import events
@@ -376,25 +376,21 @@ import asyncio
 
 
 
-@borg.on(events.NewMessage(pattern=r"\.rape (.*)", outgoing=True))
+@borg.on(events.NewMessage(pattern=".rape", outgoing=True))
 
-async def fuck(event):
+async def _(event):
 
     if event.fwd_from:
 
         return
 
-    animation_interval = 2
+    animation_interval = 0.3
 
     animation_ttl = range(0, 11)
 
-    input_str = event.pattern_match.group(1)
 
-    if input_str == "rape":
 
-        await event.edit(input_str)
-
-        animation_chars = [
+    animation_chars = [
         
             "`Targeting Rape Victim...`",
             "`Victim Selected.`",
@@ -409,8 +405,8 @@ async def fuck(event):
             "`Target Raped Successfully...\n\nPay 999$ To @RebelVicious and get Raped`"
         ]
 
-        for i in animation_ttl:
+    for i in animation_ttl:
 
-            await asyncio.sleep(animation_interval)
+        await asyncio.sleep(animation_interval)
 
-            await event.edit(animation_chars[i % 11])
+        await event.edit(animation_chars[i % 11])
