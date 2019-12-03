@@ -366,7 +366,7 @@ async def selfdestruct(destroy):
         await smsg.delete()
 
 
-"""command: .hack"""
+"""command: .rape"""
 
 from telethon import events
 
