@@ -49,7 +49,7 @@ class AntiPMMod(loader.Module):
             await message.edit(_("<code>Specify whom to block</code>"))
             return
         await message.client(functions.contacts.BlockRequest(user))
-        await message.edit(_("<code>My owner doesn't want PM from</code> <a href='tg://user?id={}'>you</a> "
+        await message.edit(_("<code>×ºℜ𝔢𝔟𝔢𝔩º× doesn't want PM from</code> <a href='tg://user?id={}'>you</a> "
                              "<code>so you have been blocked</code>").format(user))
 
     async def unblockcmd(self, message):
@@ -69,7 +69,7 @@ class AntiPMMod(loader.Module):
             await message.edit(_("<code>Who shall I allow to PM?</code>"))
             return
         self._db.set("NoPMMod", "allow", list(set(self._db.get("NoPMMod", "allow", [])).union({user})))
-        await message.edit(_("<code>My owner has allowed</code> <a href='tg://user?id={}'>you</a> "
+        await message.edit(_("<code>×ºℜ𝔢𝔟𝔢𝔩º× has allowed</code> <a href='tg://user?id={}'>you</a> "
                              "<code>to PM now</code>").format(user))
 
     async def allowedcmd(self, message):
@@ -83,7 +83,7 @@ class AntiPMMod(loader.Module):
         await message.edit("<code>Retrieving the list, hold on a sec...</code>")
         for user in authorized:
         	getuser = await self._client.get_entity(user)
-        	userlist += "  »  <a href='tg://user?id={}'>{}</a>\n".format(user, str(getuser.first_name).capitalize())
+        	userlist += "  »  <a href='tg://user?id={}'>{}</a>\n".format(user, getuser.first_name)
         await message.edit(caption + userlist)
         
     async def clearallowedcmd(self, message):
@@ -121,7 +121,7 @@ class AntiPMMod(loader.Module):
             await message.edit(_("<code>Who shall I deny to PM?</code>"))
             return
         self._db.set("NoPMMod", "allow", list(set(self._db.get("NoPMMod", "allow", [])).difference({user})))
-        await message.edit(_("<code>My owner has denied</code> <a href='tg://user?id={}'>you</a> "
+        await message.edit(_("<code>×ºℜ𝔢𝔟𝔢𝔩º× has denied</code> <a href='tg://user?id={}'>you</a> "
                              "<code>of your PM permissions.</code>").format(user))
 
     async def notifoffcmd(self, message):
@@ -151,11 +151,6 @@ class AntiPMMod(loader.Module):
     async def watcher(self, message):
         if getattr(message.to_id, "user_id", None) == self._me.user_id:
             logger.debug("pm'd!")
-            if message.from_id in self._ratelimit:
-                self._ratelimit.remove(message.from_id)
-                return
-            else:
-                self._ratelimit += [message.from_id]
             user = await utils.get_user(message)
             if user.is_self or user.bot or user.verified:
                 logger.debug("User is self, bot or verified.")
