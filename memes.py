@@ -403,7 +403,7 @@ class Meme(loader.Module):
         await hahayes.edit(reply_text)
 
 
-    async def mockcmd(self, mock):
+    async def mockscmd(self, mock):
         """ Do it and find the real fun. """
         reply_text = list()
         textx = await mock.get_reply_message()
