@@ -151,9 +151,9 @@ async def count(event):
     await event.edit(result)
 
 
-@register(outgoing=True, pattern=r"^.delpfp")
+@register(outgoing=True, pattern=r"^.delpp")
 async def remove_profilepic(delpfp):
-    """ For .delpfp command, delete your current profile picture in Telegram. """
+    """ For .delpp command, delete your current profile picture in Telegram. """
     group = delpfp.text[8:]
     if group == 'all':
         lim = 0
