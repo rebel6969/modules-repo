@@ -21,7 +21,7 @@ from .. import loader, utils
 import logging
 import datetime
 from dateutil import parser
-logger = logging.getLogger(__name__)
+logger = logging.getLogger("AFKMod")
 
 
 def register(cb):
@@ -35,7 +35,7 @@ class AFKMod(loader.Module):
         self.name = _("AFK")
         self._me = None
         self._ratelimit = []
-
+        self.counter = 0
     async def client_ready(self, client, db):
         self._db = db
         self._me = await client.get_me()
@@ -43,35 +43,57 @@ class AFKMod(loader.Module):
     async def afkcmd(self, message):
         """.afk [message]"""
         if utils.get_args_raw(message):
-            self._db.set(__name__, "afk", utils.get_args_raw(message))
+            self._db.set("AFKMOD", "afk", utils.get_args_raw(message))
         else:
-            self._db.set(__name__, "afk", "No Reason")
-        await message.edit(_("<code>×ºℜ𝔢𝔟𝔢𝔩º× is goin' AFK</code>"))
+            self._db.set("AFKMOD", "afk", "No Reason")
+        await message.edit(_("<b>×ºℜ𝔢𝔟𝔢𝔩º× is goin' AFK</b>"))
         then = datetime.datetime.now()
-        self._db.set(__name__, "capturedt", str(then))
+        self._db.set("AFKMOD", "capturedt", str(then))
 
     async def unafkcmd(self, message):
         """Remove the AFK status"""
         self._ratelimit.clear()
-        self._db.set(__name__, "afk", False)
-        await message.edit(_("<code>×ºℜ𝔢𝔟𝔢𝔩º× is no longer AFK</code>"))
+        self._db.set("AFKMOD", "afk", False)
+        await message.edit(_("<b>×ºℜ𝔢𝔟𝔢𝔩º× is no longer AFK</b>"))
+
+    async def tagoncmd(self, message):
+        """Prevents notifications from tags"""
+        notag = utils.get_args(message)
+        await utils.answer(message, "<b>AFK Notifications will not be silenced anymore.</b>")
+        self._db.set("AFKMOD", "notag", True)
+
+    async def tagoffcmd(self, message):
+        """Prevents notifications from tags"""
+        notag = utils.get_args(message)
+        await utils.answer(message, "<b>AFK Notifications will be silenced from now on.</b>")
+        self._db.set("AFKMOD", "notag", False)
 
     async def watcher(self, message):
         if message.mentioned or getattr(message.to_id, 'user_id', None) == self._me.id:
             logger.debug("tagged!")
-            if message.from_id in self._ratelimit:
-                self._ratelimit.remove(message.from_id)
-                return
-            else:
-                self._ratelimit += [message.from_id]
             user = await utils.get_user(message)
             if user.is_self or user.bot or user.verified:
                 logger.debug("User is self, bot or verified.")
                 return
             elif self.get_afk() is not False:
+                notag = self._db.get("AFKMod", "notag", {})
+                if message.mentioned and not notag:
+                    await message.client.send_read_acknowledge(
+                        message.chat, message, clear_mentions=True)
+                    msg = message.message
+                    user = message.sender.first_name
+                    chat = message.chat
+                    link = "<a href='https://t.me/c/{}/{}'>Click Here!</a>".format(chat.id, message.id)
+                    await self._db.store_asset(
+                        "<b>***YOU GOT THIS MESSAGE WHEN YOU WERE UNAVAILABLE***</b>\n\n"
+                        "<b># User: </b><a href='tg://user?id={}'>{}</a>\n"
+                        "<b># Chat: </b><a href='https://t.me/c/{}'>{}</a>\n<b># Message Link: </b>{}\n\n"
+                        "<b>Message:</b>\n<i>{}</i>"
+                        .format(message.sender.id, user, chat.id, chat.title, link, msg))
+                    pass
                 now = datetime.datetime.now()
-                afkreason = f"<code>{utils.escape_html(self.get_afk())}</code>"
-                then = self._db.get(__name__, "capturedt")
+                afkreason = f"<i>{utils.escape_html(self.get_afk())}</i>"
+                then = self._db.get("AFKMOD", "capturedt")
                 then = parser.parse(then)
                 delta = now - then
                 years = int(delta.days / 365)
@@ -94,9 +116,9 @@ class AFKMod(loader.Module):
                 while hours >= 24:
                     hours -= 24
                     pass
-                afktime = "×ºℜ𝔢𝔟𝔢𝔩º× has been afk for " + str(years) + " years " + str(months) + " months " + str(days)
+                afktime = "<b>×ºℜ𝔢𝔟𝔢𝔩º× has been afk for " + str(years) + " years " + str(months) + " months " + str(days)
                 afktime += " days " + str(hours) + " hours " + str(minutes) + " minutes " + str(seconds)
-                afktime += " seconds\nLast Seen: " + lastonline
+                afktime += " seconds\nLast Seen: " + lastonline + "</b>"
                 if years == 0:
                     afktime = afktime.replace("0 years ", "")
                     pass
@@ -116,8 +138,12 @@ class AFKMod(loader.Module):
                 if seconds == 0:
                     afktime = afktime.replace("0 seconds", "")
                     pass
-                reply = f"×ºℜ𝔢𝔟𝔢𝔩º× is afk right now. \nReason: " + afkreason + "\n\n" + afktime
-                await message.reply(reply)
+                reply = f"<b>×ºℜ𝔢𝔟𝔢𝔩º× is afk right now. \nReason:</b> " + afkreason + "</i><b>\n\n" + afktime + "</b>"
+                if self.counter < 1:
+                    await message.reply(reply)
+                    self.counter += 1
+                else:
+                    self.counter = 0
 
     def get_afk(self):
-        return self._db.get(__name__, "afk", False)
+        return self._db.get("AFKMOD", "afk", False)
