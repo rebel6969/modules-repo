@@ -427,7 +427,7 @@ async def metoo(hahayes):
     await hahayes.edit(reply_text)
 
 
-@register(outgoing=True, pattern="^.mock(?: |$)(.*)")
+@register(outgoing=True, pattern="^.mocks(?: |$)(.*)")
 async def spongemocktext(mock):
     """ Do it and find the real fun. """
     reply_text = list()
