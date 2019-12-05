@@ -1,4 +1,4 @@
-#MADE BY NIHINIVI IF THIS IS EDITED WITHOUT CREDITS THEN YOUR FAMILY TREE IS MADE UP OF LESBIAN AND HOMOS 
+#MADE BY NIHINIVI IF THIS IS EDITED WITHOUT CREDITS THEN YOUR FAMILY TREE IS MADE UP OF LESBIANS AND HOMOS 
 import io
 import os
 import requests
@@ -25,7 +25,7 @@ async def _(event):
     reply_to_id = event.message.id
     if event.reply_to_msg_id:
         reply_to_id = event.reply_to_msg_id
-    await event.edit("Searching For Song")
+    await event.edit("Searching For Song...")
     bruh(str(cmd))
     lol = glob.glob("*.mp3")
     loa = lol[0]
