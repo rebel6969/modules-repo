@@ -39,6 +39,11 @@ class Quote:
                 'https://github.com/erenmetesar/modules-repo/raw/master/Roboto-Regular.ttf',
                 '.tmp/Roboto-Regular.ttf')
             urllib.request.urlretrieve("https://github.com/rebel6969/modules-repo/raw/master/Telegram.jpg",".tmp/lol.png")
+            urllib.request.urlretrieve("https://github.com/rebel6969/mym/raw/master/Rebel-robot-Regular.ttf",".tmp/Fuck.ttf")
+            
+            
+            
+            
         top = Image.open(".tmp/top.jpg", "r").convert('RGBA')
         mid = Image.open(".tmp/mid.jpg", "r").convert('RGBA')
         bottom = Image.open(".tmp/bottom.jpg", "r").convert('RGBA')
@@ -94,7 +99,7 @@ class Quote:
         canvas.resize((canvas.width - 100, canvas.height))
 
         draw = ImageDraw.Draw(canvas)
-        font = ImageFont.truetype(".tmp/Roboto-Medium.ttf", 43)
+        font = ImageFont.truetype(".tmp/Fuck.ttf", 43)
         font2 = ImageFont.truetype(".tmp/Roboto-Regular.ttf", 33)
 
         lname = "" if not reply.sender.last_name else reply.sender.last_name
@@ -112,7 +117,7 @@ class Quote:
 
 
     
-@register(outgoing=True, pattern="^.quote(?: |$)(.*)")
+@register(outgoing=True, pattern="^.quo(?: |$)(.*)")
 async def quotexxx(message):
     
         await message.delete()
