@@ -99,8 +99,8 @@ class Quote:
         canvas.resize((canvas.width - 100, canvas.height))
 
         draw = ImageDraw.Draw(canvas)
-        font = ImageFont.truetype(".tmp/Fuck.ttf", 43)
-        font2 = ImageFont.truetype(".tmp/Roboto-Regular.ttf", 33)
+        font = ImageFont.truetype(".tmp/Fuck.ttf", 48)
+        font2 = ImageFont.truetype(".tmp/Roboto-Regular.ttf", 42)
 
         lname = "" if not reply.sender.last_name else reply.sender.last_name
         tot = reply.sender.first_name + " " + lname
