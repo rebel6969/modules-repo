@@ -1,5 +1,4 @@
 MarkupSafe
-Pillow
 aiohttp
 aiohttp_jinja2
 async-timeout
