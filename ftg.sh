@@ -5,8 +5,16 @@ tsudo pip install --upgrade pip
 tsudo termux-setup-storage
 apt update -y;apt upgrade -y
 apt --fix-broken install
-tsudo git clone https://github.com/friendly-telegram/friendly-telegram
 apt install clang -y
-tsudo pip install pillow==2.9.0
-cd f*am;tsudo pip install -r https://raw.githubusercontent.com/rebel6969/modules-repo/master/ftg-basic-req.txt
-tsudo python -m f*am --setup
+tsudo pip install future-fstrings
+tsudo pip install git+https://gitlab.com/mattia.basaglia/tgs@master
+tsudo pip install gitpython
+tsudo pip install gtts
+tsudo pip install hachoir
+tsudo pip install pyfiglet
+tsudo pip install pythondialog
+tsudo pip install pyyandextranslateapi
+tsudo pip install search-engine-parser
+tsudo pip install telethon
+tsudo git clone https://github.com/friendly-telegram/friendly-telegram
+cd f*am;tsudo python -m f*am --setup
