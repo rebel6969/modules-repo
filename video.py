@@ -31,7 +31,7 @@ async def _(event):
     reply_to_id = event.message.id
     if event.reply_to_msg_id:
         reply_to_id = event.reply_to_msg_id
-    await event.edit("Searching For Video...")
+    await event.edit("**Searching For Video...**")
     bruh(str(cmd))
     lol = glob.glob("*.mp4")
     loa = lol[0]
