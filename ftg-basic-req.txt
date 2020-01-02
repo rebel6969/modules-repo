@@ -7,7 +7,6 @@ asyncurban
 attrs
 babel
 beautifulsoup4
-cairocffi
 cairosvg
 certifi
 cffi
