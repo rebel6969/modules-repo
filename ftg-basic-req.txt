@@ -1,5 +1,4 @@
 telethon
-Pillow==2.9.0
 cairosvg
 cryptg
 aiohttp_jinja2
