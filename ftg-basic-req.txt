@@ -1,0 +1,21 @@
+cairosvg
+telethon 
+future-fstrings
+pythondialog
+heroku3
+gitpython
+babel
+meval 
+aiohttp_jinja2
+lyricsgenius
+speedtest-cli 
+pyowm
+pyyandextranslateapi
+pyfiglet
+git+https://gitlab.com/mattia.basaglia/tgs@master  # master branch is required
+gtts
+hachoir
+gitpython
+coffeehouse
+asyncurban
+search-engine-parser
