@@ -1,3 +1,7 @@
+telethon
+Pillow==2.9.0
+cairosvg
+cryptg
 aiohttp_jinja2
 asyncurban
 babel
@@ -17,7 +21,3 @@ pythondialog
 pyyandextranslateapi
 search-engine-parser
 speedtest-cli
-telethon
-Pillow==2.9.0
-cairosvg
-cryptg
