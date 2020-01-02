@@ -13,7 +13,6 @@ tsudo pip install gtts
 tsudo pip install hachoir
 tsudo pip install pyfiglet
 tsudo pip install pythondialog
-tsudo pip install pyyandextranslateapi
 tsudo pip install babel
 tsudo pip install telethon
 tsudo git clone https://github.com/friendly-telegram/friendly-telegram
