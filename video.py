@@ -23,15 +23,16 @@ from telethon.tl.types import MessageMediaPhoto
 def bruh(name):
     lc = 'youtube-dl -f mp4 "ytsearch:'+name+'"'
     os.system(lc)
-@register(outgoing=True, pattern="^.video(?: |$)(.*)")
+@register(outgoing=True, pattern="^.vid(?: |$)(.*)")
 async def _(event):
     if event.fwd_from:
         return 
     cmd = event.pattern_match.group(1)
+    await event.edit("**Searching For Video...**")
     reply_to_id = event.message.id
     if event.reply_to_msg_id:
         reply_to_id = event.reply_to_msg_id
-    await event.edit("**Searching For Video...**")
+    await event.edit("**Sending Video...**")
     bruh(str(cmd))
     lol = glob.glob("*.mp4")
     loa = lol[0]
@@ -43,5 +44,5 @@ async def _(event):
             loa, 
             force_document=False,
             caption=loa, 
-            supports_streaming=True)
+            supports_streaming=True,reply_to=reply_to_id)
     os.system("rm -rf *.mp4")
