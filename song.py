@@ -22,10 +22,11 @@ async def _(event):
     if event.fwd_from:
         return 
     cmd = event.pattern_match.group(1)
+    await event.edit("**Searching For Song...**")
     reply_to_id = event.message.id
     if event.reply_to_msg_id:
         reply_to_id = event.reply_to_msg_id
-    await event.edit("**Searching For Song...**")
+    await event.edit("**Sending Song...**")
     bruh(str(cmd))
     lol = glob.glob("*.mp3")
     loa = lol[0]
