@@ -23,7 +23,7 @@ from telethon.tl.types import MessageMediaPhoto
 def bruh(name):
     lc = 'youtube-dl -f mp4 "ytsearch:'+name+'"'
     os.system(lc)
-@register(outgoing=True, pattern="^.vid(?: |$)(.*)")
+@register(outgoing=True, pattern="^.video(?: |$)(.*)")
 async def _(event):
     if event.fwd_from:
         return 
