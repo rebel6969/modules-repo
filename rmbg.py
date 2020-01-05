@@ -27,7 +27,7 @@ async def _(event):
         return
     if event.reply_to_msg_id:
         reply_to_id = event.reply_to_msg_id
-    await event.edit("Wait underssing the background")    
+    await event.edit("Removing Background")    
     reply_message = await event.get_reply_message()
     D = await borg.download_file(reply_message.media)
     lol = await event.get_reply_message()
