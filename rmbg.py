@@ -25,6 +25,8 @@ from telethon.tl import functions, types
 async def _(event):
     if event.fwd_from:
         return
+    if event.reply_to_msg_id:
+        reply_to_id = event.reply_to_msg_id
     reply_message = await event.get_reply_message()
     D = await borg.download_file(reply_message.media)
     lol = await event.get_reply_message()
@@ -36,7 +38,7 @@ async def _(event):
     with open('removedbg.png', 'wb') as out:
     	out.write(response.content)
     	file = "removedbg.png"
-    	await event.client.send_file(event.chat_id,file,caption="Remove bg by <code>@Nihinivi</code>",force_document=True,reply_to=event.message.reply_to_msg_id )
+    	await event.client.send_file(event.chat_id,file,caption="Remove bg by <code>@Nihinivi</code>",force_document=True,reply_to=reply_to_id)
     	os.system("rm -rf rmbg.jpg")
     	os.system("rm -rf test.jpg")
     	os.system("rm -rf removedbg.png")
