@@ -1,4 +1,4 @@
-#Made by @NihiNivi and no i didnt kang it i realized that its ady made in uniborg after making it lel
+""#Made by @NihiNivi and no i didnt kang it i realized that its ady made in uniborg after making it lel
 from telethon import events
 from io import BytesIO
 from PIL import Image
@@ -27,6 +27,7 @@ async def _(event):
         return
     if event.reply_to_msg_id:
         reply_to_id = event.reply_to_msg_id
+    await event.edit("Wait underssing the background")    
     reply_message = await event.get_reply_message()
     D = await borg.download_file(reply_message.media)
     lol = await event.get_reply_message()
@@ -34,7 +35,8 @@ async def _(event):
     i.write(D)
     im = Image.open("rmbg.jpg").convert("RGB")
     im.save("test.jpg","jpeg")
-    response = requests.post('https://api.remove.bg/v1.0/removebg',files={'image_file': open("test.jpg","rb")},data={'size': 'auto'},headers={'X-Api-Key': 'muR4nX9VXTCv5CwVmy8zY3q7'},)
+    response = requests.post('https://api.remove.bg/v1.0/removebg',files={'image_file': open("test.jpg","rb")},data={'size': 'auto'},headers={'X-Api-Key': 'yKXQdn6jvLufveGFdMe8T8F8'},)
+    await event.delete()
     with open('removedbg.png', 'wb') as out:
     	out.write(response.content)
     	file = "removedbg.png"
