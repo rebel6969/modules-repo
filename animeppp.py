@@ -40,7 +40,7 @@ async def animepp():
     
 @borg.on(admin_cmd(pattern="autoweeb ?(.*)"))
 async def main(event):
-    await event.edit("**Starting Auto **Weebpp Mode** By `@Nihinivi`")
+    await event.edit("**Starting Auto Weebpp Mode By** `@Nihinivi`")
     while True:
         await animepp()
         file = await event.client.upload_file("donottouch.jpg")  
