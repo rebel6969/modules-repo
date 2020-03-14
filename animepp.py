@@ -14,14 +14,14 @@ async def animepp():
     pc = requests.get("http://getwallpapers.com/").text
     f = re.compile('/coll\w+.+')
     f = f.findall(pc)
-    if f == "" or None:
+    if f[0] == "" or None:
         animepp()
 
     hb = "http://getwallpapers.com/"+random.choice(f).replace('">',"").replace("'>","").replace('">;',"").replace("'>;","")
     lo = requests.get(hb).text
     fcs = re.compile("/\w+/full.+.jpg")
     g = fcs.findall(lo)
-    if g == None or "":
+    if g[0] == None or "":
         animepp()
 
     rf = "http://getwallpapers.com/"+random.choice(g)
@@ -40,4 +40,4 @@ async def main(event):
         file = await event.client.upload_file("donottouch.jpg")  
         await event.client(functions.photos.UploadProfilePhotoRequest( file))
         os.system("rm -rf donottouch.jpg")
-        await asyncio.sleep(7200)
+        await asyncio.sleep(3600)
