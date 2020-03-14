@@ -14,14 +14,20 @@ async def animepp():
     pc = requests.get("http://getwallpapers.com/").text
     f = re.compile('/coll\w+.+')
     f = f.findall(pc)
-    if f[0] == "" or None:
+    try:
+        if f[0] == "" or None:
+            animepp()
+    except:
         animepp()
 
     hb = "http://getwallpapers.com/"+random.choice(f).replace('">',"").replace("'>","").replace('">;',"").replace("'>;","")
     lo = requests.get(hb).text
     fcs = re.compile("/\w+/full.+.jpg")
     g = fcs.findall(lo)
-    if g[0] == None or "":
+    try:
+        if g[0] == None or "":
+            animepp()
+    except:
         animepp()
 
     rf = "http://getwallpapers.com/"+random.choice(g)
