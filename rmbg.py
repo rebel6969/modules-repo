@@ -40,7 +40,7 @@ async def _(event):
     with open('removedbg.png', 'wb') as out:
     	out.write(response.content)
     	file = "removedbg.png"
-    	await event.client.send_file(event.chat_id,file,caption="Remove bg by <code>@Nihinivi</code>",force_document=True,reply_to=reply_to_id)
+    	await event.client.send_file(event.chat_id,file,caption="**Remove bg by** `@Nihinivi`",force_document=True,reply_to=reply_to_id)
     	os.system("rm -rf rmbg.jpg")
     	os.system("rm -rf test.jpg")
     	os.system("rm -rf removedbg.png")
