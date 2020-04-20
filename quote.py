@@ -117,7 +117,7 @@ class Quote:
 
 
     
-@register(outgoing=True, pattern="^.quotes(?: |$)(.*)")
+@register(outgoing=True, pattern="^.quote(?: |$)(.*)")
 async def quotexxx(message):
     
         await message.delete()
