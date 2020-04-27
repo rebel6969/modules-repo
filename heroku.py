@@ -18,6 +18,7 @@ from telethon.tl.types import MessageMediaPhoto
 import glob
 
 class Var:
+    HEROKU_APP_NAME="young-inlet-89534"
     HEROKU_API_KEY="f1072845-0058-4b28-9f01-928b3f651110"
 
 Heroku = heroku3.from_key(Var.HEROKU_API_KEY)
