@@ -4,20 +4,15 @@ import os
 import requests
 from userbot.events import register
 from telethon.tl.types import MessageMediaPhoto
-
 import glob
 import time
 from time import sleep
 import youtube_dl
 import asyncio
 from uniborg.util import progress, humanbytes, time_formatter
-
- 
 from .. import loader,utils
 from userbot.events import register
 from telethon.tl.types import MessageMediaPhoto
-
-
 
 
 def bruh(name):
@@ -37,12 +32,11 @@ async def _(event):
     lol = glob.glob("*.mp4")
     loa = lol[0]
     xx = await event.client.upload_file(loa,part_size_kb=512)
-    await event.edit("done")
-    
-    await event.client.send_file( 
+    await event.delete()
+    await event.client.send_file(
             event.chat_id,
-            xx, 
+            xx,
             force_document=False,
-            caption=loa, 
+            caption=loa,
             supports_streaming=True,reply_to=reply_to_id)
     os.system("rm -rf *.mp4")
