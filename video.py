@@ -12,7 +12,7 @@ import youtube_dl
 import asyncio
 from uniborg.util import progress, humanbytes, time_formatter
 
-
+ 
 from .. import loader,utils
 from userbot.events import register
 from telethon.tl.types import MessageMediaPhoto
@@ -36,12 +36,12 @@ async def _(event):
     bruh(str(cmd))
     lol = glob.glob("*.mp4")
     loa = lol[0]
-    
-    await event.delete()
+    xx = await event.client.upload_file(loa,part_size_kb=512)
+    await event.edit("done")
     
     await event.client.send_file( 
             event.chat_id,
-            loa, 
+            xx, 
             force_document=False,
             caption=loa, 
             supports_streaming=True,reply_to=reply_to_id)
