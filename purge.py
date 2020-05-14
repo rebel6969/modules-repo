@@ -24,11 +24,11 @@ def register(cb):
     cb(PurgeMod())
 
 
+@loader.tds
 class PurgeMod(loader.Module):
     """Deletes your messages"""
-    def __init__(self):
-        self.name = _("Purge")
-
+    strings = {"name": "Purge",
+               "from_where": "From where shall I purge?"}
     async def purgecmd(self, message):
         """Purge from the replied message"""
         max = utils.get_args_raw(message)
