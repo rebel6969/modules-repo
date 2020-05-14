@@ -28,13 +28,11 @@ from telethon.tl.functions.channels import JoinChannelRequest
 def register(cb):
     cb(HelpMod())
 
+@loader.tds
 class HelpMod(loader.Module):
     """Prevents people sending you unsolicited private messages"""
-    def __init__(self):
-        super().__init__()
-        self.name = _("Help")
-        self.allmodules = None
-        self.client = None
+    strings = {"name": "Help",
+               "Help Module": "Module Wise Categories"}
         
     async def supportcmd(self, message):
     	"""Joins the support chat"""
