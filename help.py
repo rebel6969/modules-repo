@@ -16,11 +16,12 @@
 #    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-from .. import loader, utils
+from .. import loader, utils, main, security
 
 import logging
 import inspect
 
+from telethon.tl.functions.channels import JoinChannelRequest
 from telethon import functions, types
 logger = logging.getLogger(__name__)
 from telethon.tl.functions.channels import JoinChannelRequest
@@ -31,19 +32,31 @@ def register(cb):
 def register(cb):
     cb(HelpMod())
 
+                 
+@loader.tds
 class HelpMod(loader.Module):
-    """Prevents people sending you unsolicited private messages"""
-    def __init__(self):
-        super().__init__()
-        self.name = _("Help")
-        self.allmodules = None
-        self.client = None
-        
-    async def supportcmd(self, message):
-    	"""Joins the support chat"""
-    	await self.client(JoinChannelRequest("https://t.me/friendlytgbot"))
-    	await message.edit(_("<code>Join to</code> <a href='https://t.me/friendlytgbot'>support chat</a>"))
+    """Provides this help message"""
+    strings = {"name": "Help",
+               "bad_module": "<b>Invalid module name specified</b>",
+               "single_mod_header": ("<b>Help for</b> <u>{}</u>:\nNote that the monospace text are the commands "
+                                     "and they can be run with <code>{}&lt;command&gt;</code>"),
+               "single_cmd": "\n• <code><u>{}</u></code>\n",
+               "undoc_cmd": "There is no documentation for this command",
+               "all_header": ("<b>Help for</b> <a href='https://t.me/friendlytgbot'>Friendly-Telegram</a>\n"
+                              "For more help on how to use a command, type <code>{}help &lt;module name&gt;</code>\n\n"
+                              "<b>Available Modules:</b>"),
+               "mod_tmpl": "\n• <b>{}</b>",
+               "first_cmd_tmpl": ": <code>{}",
+               "cmd_tmpl": ", {}",
+               "footer": ("\n\nYou can <b>read more</b> about most commands "
+                          "<a href='https://friendly-telegram.gitlab.io'>here</a>"),
+               "joined": "<b>Joined to</b> <a href='https://t.me/friendlytgbot'>support chat</a>",
+               "join": "<b>Join the</b> <a href='https://t.me/friendlytgbot'>support chat</a>"}
 
+    @loader.unrestricted
+                                                        
+                                                                                                                                                                                                       
+                                                        
     async def client_ready(self, client, db):
     	self.client = client    
         
@@ -71,6 +84,12 @@ class HelpMod(loader.Module):
         		raph = raph.replace("Raphielgang Configuration Placeholder:", "")
         	if mod.name.find("UniBorg") != -1:
         		uni += "\n\n<b>" + mod.name + "</b>: "
+                 
+                                                                         
+                                                                            
+                                                                               
+                                              
+                                                                         
         		for cmd in mod.commands:
         			uni += "<code>." + cmd + "</code>, "
         		uni = uni[:-2:]
@@ -83,10 +102,18 @@ class HelpMod(loader.Module):
         		ftg = ftg.replace("Raphielgang Configuration Placeholder:", "")
         		ftg = ftg.replace("Uniborg Configuration Placeholder:", "")
         	all += "\n\n<b>" + mod.name + "</b>: "
+                                                        
+                                                                       
+                            
+                                                                       
+                                                                                   
+                                    
+                             
         	for cmd in mod.commands:
         		all += "<code>." + cmd + "</code>, "
         	all = all[:-2:]
         if args == "uni":
+                                  
         	await message.edit(uni)
         	return
         if args == "raph":
