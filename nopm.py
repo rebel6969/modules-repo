@@ -1,5 +1,3 @@
-# -*- coding: future_fstrings -*-
-
 #    Friendly Telegram (telegram userbot)
 #    Copyright (C) 2018-2019 The Authors
 
@@ -21,21 +19,40 @@ from .. import loader, utils
 import logging
 
 from telethon import functions, types
-logger = logging.getLogger("NoPMMod")
+logger = logging.getLogger(__name__)
 
 
-def register(cb):
-    cb(AntiPMMod())
-
-
+@loader.tds
 class AntiPMMod(loader.Module):
     """Prevents people sending you unsolicited private messages"""
+    strings = {"name": "Anti PM",
+               "limit_cfg_doc": "Max number of PMs before user is blocked, or None",
+               "who_to_block": "<b>Specify whom to block</b>",
+               "blocked": ("<b>×ºℜ𝔢𝔟𝔢𝔩º× doesn't want any PM from</b> <a href='tg://user?id={}'>you</a>, "
+                           "<b>so you have been blocked!</b>"),
+               "who_to_unblock": "<b>Specify whom to unblock</b>",
+               "unblocked": ("<b>×ºℜ𝔢𝔟𝔢𝔩º× has unblocked</b> <a href='tg://user?id={}'>you</a>"),
+               "who_to_allow": "<b>Who shall I allow to PM?</b>",
+               "allowed": "<code>×ºℜ𝔢𝔟𝔢𝔩º× has allowed</code> <a href='tg://user?id={}'>you</a> "
+                             "<code>to PM now</code>",
+               "who_to_report": "<b>Who shall I report?</b>",
+               "reported": "<b>You just got reported spam!</b>",
+               "who_to_deny": "<b>Who shall I deny to PM?</b>",
+               "denied": ("<b>I have denied</b> <a href='tg://user?id={}'>you</a> "
+                          "<b>of your PM permissions.</b>"),
+               "notif_off": "<b>Notifications from denied PMs are silenced.</b>",
+               "notif_on": "<b>Notifications from denied PMs are now activated.</b>",
+               "go_away": ("Hey there! Unfortunately, I don't accept private messages from "
+                            "strangers.\n\nPlease contact me in a group, or <b>wait</b> "
+                            "for me to approve you."),
+               "triggered": ("Hey! I don't appreciate you barging into my PM like this! "
+                             "Did you even ask me for approving you to PM? No? Goodbye then."
+                             "\n\nPS: you've been reported as spam already.")}
+
     def __init__(self):
-        self.name = _("Anti PM")
-        self.config = loader.ModuleConfig("PM_BLOCK_LIMIT", None, "Max number of PMs before user is blocked, or None")
+        self.config = loader.ModuleConfig("PM_BLOCK_LIMIT", None, lambda m: self.strings("limit_cfg_doc", m))
         self._me = None
         self._ratelimit = []
-        self.count = 0
 
     async def client_ready(self, client, db):
         self._db = db
@@ -46,65 +63,36 @@ class AntiPMMod(loader.Module):
         """Block this user to PM without being warned"""
         user = await utils.get_target(message)
         if not user:
-            await message.edit(_("<code>Specify whom to block</code>"))
+            await utils.answer(message, self.strings("who_to_block", message))
             return
         await message.client(functions.contacts.BlockRequest(user))
-        await message.edit(_("<code>×ºℜ𝔢𝔟𝔢𝔩º× doesn't want PM from</code> <a href='tg://user?id={}'>you</a> "
-                             "<code>so you have been blocked</code>").format(user))
+        await utils.answer(message, self.strings("blocked", message).format(user))
 
     async def unblockcmd(self, message):
-        """Unlock this user to PM"""
+        """Unblock this user to PM"""
         user = await utils.get_target(message)
         if not user:
-            await message.edit(_("<code>Specify whom to unblock </code>"))
+            await utils.answer(message, self.strings("who_to_unblock", message))
             return
         await message.client(functions.contacts.UnblockRequest(user))
-        await message.edit(_("<code>Alright fine! I'll forgive them this time. PM has been unblocked for </code> "
-                             "<a href='tg://user?id={}'>this user</a>").format(user))
+        await utils.answer(message, self.strings("unblocked", message).format(user))
 
     async def allowcmd(self, message):
         """Allow this user to PM"""
         user = await utils.get_target(message)
         if not user:
-            await message.edit(_("<code>Who shall I allow to PM?</code>"))
+            await utils.answer(message, self.strings("who_to_allow", message))
             return
-        self._db.set("NoPMMod", "allow", list(set(self._db.get("NoPMMod", "allow", [])).union({user})))
-        await message.edit(_("<code>×ºℜ𝔢𝔟𝔢𝔩º× has allowed</code> <a href='tg://user?id={}'>you</a> "
-                             "<code>to PM now</code>").format(user))
+        self._db.set(__name__, "allow", list(set(self._db.get(__name__, "allow", [])).union({user})))
+        await utils.answer(message, self.strings("allowed", message).format(user))
 
-    async def allowedcmd(self, message):
-        """Shows the list of authorized users"""
-        authorized = self._db.get("NoPMMod", "allow")
-        if not authorized:
-        	await message.edit("<code>No one is allowed to PM you so far</code>")
-        	return
-        userlist = ""
-        caption = "<b>Here are the users that are allowed to PM you:</b>\n\n"
-        await message.edit("<code>Retrieving the list, hold on a sec...</code>")
-        for user in authorized:
-        	getuser = await self._client.get_entity(user)
-        	userlist += "  »  <a href='tg://user?id={}'>{}</a>\n".format(user, getuser.first_name)
-        await message.edit(caption + userlist)
-        
-    async def clearallowedcmd(self, message):
-    	"""Clears the list of authorized users"""
-    	authorized = self._db.get("NoPMMod", "allow")
-    	if not authorized:
-        	await message.edit("<code>No one is allowed to PM you so far</code>")
-        	return
-    	else:
-        	authorized.clear()
-        	self._db.get("NoPMMod", "allow", authorized)
-        	await message.edit("<code>No one is allowed to PM you anymore</code>")
-        	return
-        	
     async def reportcmd(self, message):
         """Report the user spam. Use only in PM"""
         user = await utils.get_target(message)
         if not user:
-            await message.edit(_("<code>Who shall I report?</code>"))
+            await utils.answer(message, self.strings("who_to_report", message))
             return
-        self._db.set("NoPMMod", "allow", list(set(self._db.get("NoPMMod", "allow", [])).difference({user})))
+        self._db.set(__name__, "allow", list(set(self._db.get(__name__, "allow", [])).difference({user})))
         if message.is_reply and isinstance(message.to_id, types.PeerChannel):
             # Report the message
             await message.client(functions.messages.ReportRequest(peer=message.chat_id,
@@ -112,45 +100,35 @@ class AntiPMMod(loader.Module):
                                                                   reason=types.InputReportReasonSpam()))
         else:
             await message.client(functions.messages.ReportSpamRequest(peer=message.to_id))
-        await message.edit("<code>You just got reported spam!</code>")
+        await utils.answer(message, self.strings("reported", message))
 
     async def denycmd(self, message):
         """Deny this user to PM without being warned"""
         user = await utils.get_target(message)
         if not user:
-            await message.edit(_("<code>Who shall I deny to PM?</code>"))
+            await utils.answer(message, self.strings("who_to_deny", message))
             return
-        self._db.set("NoPMMod", "allow", list(set(self._db.get("NoPMMod", "allow", [])).difference({user})))
-        await message.edit(_("<code>×ºℜ𝔢𝔟𝔢𝔩º× has denied</code> <a href='tg://user?id={}'>you</a> "
-                             "<code>of your PM permissions.</code>").format(user))
+        self._db.set(__name__, "allow", list(set(self._db.get(__name__, "allow", [])).difference({user})))
+        await utils.answer(message, self.strings("denied", message).format(user))
 
     async def notifoffcmd(self, message):
         """Disable the notifications from denied PMs"""
-        self._db.set("NoPMMod", "notif", True)
-        await message.edit(_("<code>Notifications from denied PMs are silenced.</code>"))
+        self._db.set(__name__, "notif", True)
+        await utils.answer(message, self.strings("notif_off", message))
 
     async def notifoncmd(self, message):
-        """Disable the notifications from denied PMs"""
-        self._db.set("NoPMMod", "notif", False)
-        await message.edit(_("<code>Notifications from denied PMs are now activated.</code>"))
+        """Enable the notifications from denied PMs"""
+        self._db.set(__name__, "notif", False)
+        await utils.answer(message, self.strings("notif_on", message))
 
-    async def setlimitcmd(self, message):
-        """Sets a message limit to auto-block"""
-        count = utils.get_args_raw(message)
-        if not count.isdigit():
-        	await message.edit("<code>Enter an actual number</code>")
-        	return
-        else:
-        	if int(count) < 2:
-        		await message.edit("<code>Value has to be higher than 1</code>")
-        		return
-        	else:
-        		self._db.set("NoPMMod", "msglimit", int(count))
-        		await message.edit(_("<code>Maximum message limit has been successfully set to " + str(count) + ".</code>"))
-    
     async def watcher(self, message):
         if getattr(message.to_id, "user_id", None) == self._me.user_id:
             logger.debug("pm'd!")
+            if message.from_id in self._ratelimit:
+                self._ratelimit.remove(message.from_id)
+                return
+            else:
+                self._ratelimit += [message.from_id]
             user = await utils.get_user(message)
             if user.is_self or user.bot or user.verified:
                 logger.debug("User is self, bot or verified.")
@@ -158,22 +136,19 @@ class AntiPMMod(loader.Module):
             if self.get_allowed(message.from_id):
                 logger.debug("Authorised pm detected")
             else:
-                await message.respond(_("<code>Hey there! Unfortunately, I don't accept private messages from "
-                                        "strangers.\n\nPlease contact me in a group, or</code> <b>wait</b> "
-                                        "<code>for me to approve you.</code>"))
-                max = self._db.get("NoPMMod", "msglimit")
-                self.count += 1
-                if self.count >= max:
-                	await message.respond(_("<code>Hey! I don't appreciate you barging into my PM like this! "
-                	"Did you even ask me for approving you to PM? No? Goodbye then."
-                	"\n\nAh btw, you've been reported as spam already.</code>"))
-                	self.count = 0
-                	if self._db.get("NoPMMod", "notif", True):
-                		await message.client.send_read_acknowledge(message.chat_id)
-                	await message.client(functions.contacts.BlockRequest(message.from_id))
-                	await functions.message.ReportSpamRequest(message.chat_id)
-                if self._db.get("NoPMMod", "notif", True):
+                await utils.answer(message, self.strings("go_away", message))
+                if isinstance(self.config["PM_BLOCK_LIMIT"], int):
+                    limit = self._db.get(__name__, "limit", {})
+                    if limit.get(message.from_id, 0) >= self.config["PM_BLOCK_LIMIT"]:
+                        await utils.answer(message, self.strings("triggered", message))
+                        await message.client(functions.contacts.BlockRequest(message.from_id))
+                        await message.client(functions.messages.ReportSpamRequest(peer=message.from_id))
+                        del limit[message.from_id]
+                        self._db.set(__name__, "limit", limit)
+                    else:
+                        self._db.set(__name__, "limit", {**limit, message.from_id: limit.get(message.from_id, 0) + 1})
+                if self._db.get(__name__, "notif", False):
                     await message.client.send_read_acknowledge(message.chat_id)
 
     def get_allowed(self, id):
-        return id in self._db.get("NoPMMod", "allow", [])
+        return id in self._db.get(__name__, "allow", [])
