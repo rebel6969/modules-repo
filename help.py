@@ -29,9 +29,6 @@ from telethon.tl.functions.channels import JoinChannelRequest
 def register(cb):
     cb(HelpMod())
 
-def register(cb):
-    cb(HelpMod())
-
                  
 @loader.tds
 class HelpMod(loader.Module):
