@@ -39,7 +39,7 @@ class AntiPMMod(loader.Module):
                "reported": "<b>You just got reported spam!</b>",
                "who_to_deny": "<b>Who shall I deny to PM?</b>",
                "denied": ("<code>×ºℜ𝔢𝔟𝔢𝔩º× has denied</code> <a href='tg://user?id={}'>you</a> "
-                          "<b>of PM permissions.</b>"),
+                          "`of PM permissions.`"),
                "notif_off": "<b>Notifications from denied PMs are silenced.</b>",
                "notif_on": "<b>Notifications from denied PMs are now activated.</b>",
                "go_away": ("Hey there! Unfortunately, I don't accept private messages from "
