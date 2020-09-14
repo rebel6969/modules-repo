@@ -11,28 +11,30 @@ from time import sleep
 import os , requests , re , random , urllib , string
 
 async def animepp():
-    pc = requests.get("http://getwallpapers.com/").text
-    f = re.compile('/coll\w+.+')
-    f = f.findall(pc)
-    try:
-        if f[0] == "" or None:
-            animepp()
-    except:
-        animepp()
-
-    hb = "http://getwallpapers.com/"+random.choice(f).replace('">',"").replace("'>","").replace('">;',"").replace("'>;","")
-    lo = requests.get(hb).text
-    fcs = re.compile("/\w+/full.+.jpg")
-    g = fcs.findall(lo)
-    try:
-        if g[0] == None or "":
-            animepp()
-    except:
-        animepp()
-
-    rf = "http://getwallpapers.com/"+random.choice(g)
-    urllib.request.urlretrieve(rf,"donottouch.jpg")
-
+	try:
+	    pc = requests.get("http://getwallpapers.com/").text
+	    f = re.compile('/coll\w+.+')
+	    f = f.findall(pc)
+	    try:
+	        if f[0] == "" or None:
+	            animepp()
+	    except:
+	        animepp()
+	
+	    hb = "http://getwallpapers.com/"+random.choice(f).replace('">',"").replace("'>","").replace('">;',"").replace("'>;","")
+	    lo = requests.get(hb).text
+	    fcs = re.compile("/\w+/full.+.jpg")
+	    g = fcs.findall(lo)
+	    try:
+	        if g[0] == None or "":
+	            animepp()
+	    except:
+	        animepp()
+	
+	    rf = "http://getwallpapers.com/"+random.choice(g)
+	    urllib.request.urlretrieve(rf,"donottouch.jpg")
+	except:
+		await animepp()
 
 
         
