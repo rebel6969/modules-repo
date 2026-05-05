@@ -1,0 +1,47 @@
+/* SoloWatch Jellyfish FIX v10 — alignment + spacing */
+
+@media (min-width: 50em) {
+
+  /* 1. Poster: align vertically with description */
+  .layout-desktop .detailImageContainer .card {
+    position: relative !important;
+    width: 27.5vw !important;
+    max-width: 38vw !important;
+    margin-top: 2.5rem !important; /* KEY: push down to align with red box */
+    margin-bottom: 0 !important;
+  }
+
+  /* 2. Match content offset to poster */
+  .layout-desktop .detailPagePrimaryContent {
+    padding-left: 30vw !important;
+    padding-right: 2% !important;
+    padding-top: 1rem !important; /* reduce top gap */
+  }
+
+  /* 3. Remove excessive spacing everywhere */
+  .layout-desktop .infoWrapper {
+    margin: 0 !important;
+  }
+
+  /* 4. Tighten description + metadata spacing */
+  .layout-desktop .itemOverview,
+  .layout-desktop .itemDetailsGroup {
+    margin-top: 1rem !important;
+    margin-bottom: 1rem !important;
+  }
+
+  /* 5. Kill giant gaps before sections */
+  .layout-desktop .detailPageSecondaryContainer,
+  .layout-desktop .detailVerticalSection,
+  .layout-desktop .verticalSection {
+    margin-top: 1.5rem !important; /* was much larger */
+    padding-top: 0 !important;
+  }
+
+  /* 6. Optional: tighten headers like "Next Up", "Seasons" */
+  .layout-desktop h2,
+  .layout-desktop .sectionTitle {
+    margin-top: 1rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+}
