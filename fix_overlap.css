@@ -1,0 +1,71 @@
+/* SoloWatch Jellyfin Jellyfish layout fix
+   Fixes Jellyfish theme.css overlap on item detail pages.
+   Load this AFTER the Jellyfish theme imports.
+*/
+
+.layout-desktop .detailImageContainer .card {
+  position: relative !important;
+  top: -12.96em !important;
+  left: 3.3% !important;
+  width: 25vw !important;
+  max-width: 25vw !important;
+  max-height: none !important;
+  margin-bottom: -12.96em !important;
+  z-index: 3 !important;
+}
+
+.layout-desktop .infoWrapper {
+  margin-top: 0 !important;
+  margin-left: 0 !important;
+}
+
+.layout-desktop .nameContainer {
+  position: static !important;
+  margin-top: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  flex-wrap: wrap !important;
+}
+
+.layout-desktop .itemMiscInfo {
+  position: static !important;
+  margin-left: 0 !important;
+  margin-top: 0 !important;
+}
+
+[dir="ltr"] .layout-desktop .detailPageContent,
+.layout-desktop [dir="ltr"] .detailPageContent {
+  padding-left: 32.45vw !important;
+  padding-right: 2% !important;
+}
+
+[dir="rtl"] .layout-desktop .detailPageContent,
+.layout-desktop [dir="rtl"] .detailPageContent {
+  padding-left: 2% !important;
+  padding-right: 32.45vw !important;
+}
+
+[dir="ltr"] .layout-desktop .detailPagePrimaryContent,
+.layout-desktop [dir="ltr"] .detailPagePrimaryContent {
+  padding-left: 32.45vw !important;
+  padding-right: 2% !important;
+}
+
+[dir="rtl"] .layout-desktop .detailPagePrimaryContent,
+.layout-desktop [dir="rtl"] .detailPagePrimaryContent {
+  padding-left: 2% !important;
+  padding-right: 32.45vw !important;
+}
+
+.layout-desktop .detailPagePrimaryContent {
+  padding-top: 1.25em !important;
+  position: relative !important;
+}
+
+/* Keep rows like Next Up / Seasons in normal flow */
+.layout-desktop .detailVerticalSection,
+.layout-desktop .verticalSection,
+.layout-desktop .itemsContainer {
+  position: relative !important;
+}
