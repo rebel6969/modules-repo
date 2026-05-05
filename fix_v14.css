@@ -1,0 +1,69 @@
+/* SoloWatch Jellyfish FIX v14 — correct ordering + alignment */
+
+@media (min-width: 50em) {
+
+  /* 1. Turn main content into layout container */
+  .layout-desktop .detailPageWrapperContainer {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: flex-start !important;
+  }
+
+  /* LEFT: poster */
+  .layout-desktop .detailImageContainer {
+    flex: 0 0 26vw !important;
+    margin-top: 4rem !important;
+  }
+
+  .layout-desktop .detailImageContainer .card {
+    width: 100% !important;
+    height: auto !important;
+  }
+
+  /* RIGHT COLUMN */
+  .layout-desktop .detailPageContent {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    padding-left: 2rem !important;
+  }
+
+  /* 2. FORCE CORRECT ORDER */
+
+  /* Red description block */
+  .layout-desktop .itemOverview {
+    order: 1 !important;
+    margin-top: 2rem !important;
+  }
+
+  /* Genres / details block */
+  .layout-desktop .itemDetailsGroup {
+    order: 2 !important;
+    margin-top: 1rem !important;
+  }
+
+  /* Schedule */
+  .layout-desktop .itemMiscInfo {
+    order: 3 !important;
+    margin-top: 1rem !important;
+  }
+
+  /* Next Up + Seasons container */
+  .layout-desktop .detailPageSecondaryContainer {
+    order: 4 !important;
+    margin-top: 2rem !important;
+  }
+
+  /* 3. Remove ALL previous layout hacks */
+  .layout-desktop .infoWrapper,
+  .layout-desktop .nameContainer {
+    position: static !important;
+    margin: 0 !important;
+  }
+
+  /* 4. Clean spacing */
+  .layout-desktop .detailVerticalSection,
+  .layout-desktop .verticalSection {
+    margin-top: 1.5rem !important;
+  }
+}
