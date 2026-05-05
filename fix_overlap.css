@@ -1,4 +1,4 @@
-/* SoloWatch Jellyfish overlap fix v2
+/* SoloWatch Jellyfish overlap fix v3
    Preserves Jellyfish layout, only fixes section overlap.
 */
 
@@ -17,7 +17,7 @@
   }
 
   .layout-desktop .detailPagePrimaryContent {
-    padding-left: 20.4vw !important;
+    padding-left: 22vw !important; /* updated from 20.4vw */
     padding-right: 2% !important;
     padding-bottom: 2rem !important;
     min-height: calc(27.5vw + 11rem) !important;
@@ -37,7 +37,7 @@
   }
 
   .layout-desktop .infoWrapper {
-    margin-top: 245px !important; /* adjust if needed */
+    margin-top: 200px !important; /* updated from 245px */
     margin-left: 20.8vw !important;
   }
 
