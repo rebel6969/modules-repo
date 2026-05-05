@@ -1,59 +1,30 @@
-/* SoloWatch Jellyfish overlap fix v4
-   Poster alignment adjustment only.
-*/
+/* SoloWatch Jellyfish overlap fix v6 */
 
 @media (min-width: 50em) {
   .layout-desktop .detailImageContainer .card {
-    top: 14em !important; /* updated from 9em */
+    position: relative !important;
+    top: 14em !important;
+    left: 3.3% !important;
     width: 18.3vw !important;
     max-width: 25vw !important;
     max-height: none !important;
-    margin-bottom: 2rem !important;
-  }
 
-  .layout-desktop .detailPageContent {
-    padding-left: 3.3% !important;
-    padding-right: 2% !important;
+    /* critical: reserve space for the visual offset */
+    margin-bottom: 14em !important;
+
+    z-index: 3 !important;
   }
 
   .layout-desktop .detailPagePrimaryContent {
     padding-left: 22vw !important;
     padding-right: 2% !important;
     padding-bottom: 2rem !important;
-    min-height: calc(27.5vw + 11rem) !important;
     position: relative !important;
-  }
-
-  .layout-desktop .detailPageWrapperContainer:has(.detailImageContainer .backdropCard) .detailPagePrimaryContent {
-    min-height: calc(10.3vw + 11rem) !important;
-  }
-
-  .layout-desktop .detailPageWrapperContainer:has(.detailImageContainer .squareCard) .detailPagePrimaryContent {
-    min-height: calc(18.3vw + 11rem) !important;
-  }
-
-  .layout-desktop .detailPageWrapperContainer:has(.detailImageContainer .portraitCard) .detailPagePrimaryContent {
-    min-height: calc(27.5vw + 11rem) !important;
   }
 
   .layout-desktop .infoWrapper {
     margin-top: 200px !important;
     margin-left: 20.8vw !important;
-  }
-
-  .layout-desktop .nameContainer {
-    position: absolute !important;
-    margin-top: -3em !important;
-    display: flex !important;
-    flex-direction: row !important;
-    align-items: baseline !important;
-    flex-wrap: nowrap !important;
-  }
-
-  .layout-desktop .itemMiscInfo {
-    position: absolute !important;
-    margin-left: 0.75em !important;
-    margin-top: 1em !important;
   }
 
   .layout-desktop .detailPageSecondaryContainer,
