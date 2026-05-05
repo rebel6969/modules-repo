@@ -1,0 +1,36 @@
+/* SoloWatch Jellyfish FIX v11 — precise alignment */
+
+@media (min-width: 50em) {
+
+  /* 1. Poster size stays large */
+  .layout-desktop .detailImageContainer .card {
+    width: 27.5vw !important;
+    max-width: 38vw !important;
+
+    /* KEY FIX: align with description box */
+    margin-top: 6.5rem !important;
+
+    margin-bottom: 0 !important;
+    position: relative !important;
+  }
+
+  /* 2. Keep content spacing correct */
+  .layout-desktop .detailPagePrimaryContent {
+    padding-left: 30vw !important;
+    padding-right: 2% !important;
+  }
+
+  /* 3. DO NOT touch layout order anymore */
+  .layout-desktop .detailPageSecondaryContainer,
+  .layout-desktop .detailVerticalSection,
+  .layout-desktop .verticalSection {
+    margin-top: 1.5rem !important;
+  }
+
+  /* 4. Slightly tighten red boxes spacing */
+  .layout-desktop .itemOverview,
+  .layout-desktop .itemDetailsGroup {
+    margin-top: 1rem !important;
+    margin-bottom: 1rem !important;
+  }
+}
