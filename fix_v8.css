@@ -1,0 +1,51 @@
+/* SoloWatch Jellyfish FIX v8 — remove sticky poster */
+
+@media (min-width: 50em) {
+
+  /* 1. Disable sticky/fixed behavior from Jellyfish */
+  .layout-desktop .detailImageContainer {
+    position: relative !important;
+    top: auto !important;
+  }
+
+  /* Some Jellyfish builds apply sticky here */
+  .layout-desktop .detailImageContainer .card {
+    position: relative !important;
+    top: 0 !important;
+    left: 0 !important;
+    margin: 0 !important;
+    width: 18.3vw !important;
+    max-width: 25vw !important;
+  }
+
+  /* 2. Align content next to poster */
+  .layout-desktop .detailPagePrimaryContent {
+    padding-left: 22vw !important;
+    padding-right: 2% !important;
+    position: relative !important;
+  }
+
+  /* 3. Reset all artificial offsets */
+  .layout-desktop .infoWrapper {
+    margin: 0 !important;
+  }
+
+  .layout-desktop .nameContainer,
+  .layout-desktop .itemMiscInfo {
+    position: static !important;
+    margin: 0 !important;
+  }
+
+  /* 4. Ensure everything scrolls together */
+  .layout-desktop .detailPageWrapperContainer {
+    overflow: visible !important;
+  }
+
+  .layout-desktop .detailPageSecondaryContainer,
+  .layout-desktop .detailVerticalSection,
+  .layout-desktop .verticalSection {
+    clear: both !important;
+    position: relative !important;
+    margin-top: 2rem !important;
+  }
+}
