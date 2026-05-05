@@ -1,0 +1,48 @@
+/* SoloWatch Jellyfish FIX v9 */
+
+@media (min-width: 50em) {
+
+  /* 1. Larger poster (1.5x) */
+  .layout-desktop .detailImageContainer .card {
+    position: relative !important;
+    width: 27.5vw !important;   /* was 18.3vw */
+    max-width: 38vw !important;
+    height: auto !important;
+    top: 0 !important;
+    left: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* 2. Adjust content offset to match bigger poster */
+  .layout-desktop .detailPagePrimaryContent {
+    padding-left: 30vw !important; /* match poster width */
+    padding-right: 2% !important;
+  }
+
+  /* 3. Ensure info blocks stay at top */
+  .layout-desktop .infoWrapper {
+    margin: 0 !important;
+  }
+
+  /* 4. Force metadata blocks ABOVE sections */
+  .layout-desktop .detailPagePrimaryContent > * {
+    display: block;
+  }
+
+  /* 5. Push Next Up / Seasons BELOW description blocks */
+  .layout-desktop .detailPageSecondaryContainer,
+  .layout-desktop .detailVerticalSection,
+  .layout-desktop .verticalSection {
+    order: 2;
+    display: block !important;
+    margin-top: 2rem !important;
+    clear: both !important;
+  }
+
+  /* 6. Ensure description blocks stay first */
+  .layout-desktop .itemOverview,
+  .layout-desktop .itemDetailsGroup {
+    order: 1;
+    display: block !important;
+  }
+}
